@@ -1,6 +1,7 @@
 const express = require('express');
 const koalaRouter = express.Router();
 
+// DB CONNECTION
 const currentInventory = [
     {
         id: 1,
@@ -52,14 +53,17 @@ const currentInventory = [
     }  
 ];
 
-// DB CONNECTION
-
-
 // GET
-
+koalaRouter.get('/', (req, res) =>{
+    res.send(currentInventory);
+});
 
 // POST
-
+koalaRouter.post('/', (req, res) => {
+    const koala = req.body;
+    currentInventory.push(koala);
+    res.sendStatus(201);
+  });
 
 // PUT
 

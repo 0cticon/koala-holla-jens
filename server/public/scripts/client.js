@@ -16,11 +16,7 @@ function setupClickListeners() {
     // NOT WORKING YET :(
     // using a test object
     let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
+
     };
     // call saveKoala with the new obejct
     saveKoala( koalaToSend );
@@ -29,51 +25,50 @@ function setupClickListeners() {
 
 function getKoalas(){
   console.log( 'in getKoalas' );
-  // ajax call to server to get koalas
+  $.ajax({
+    type: 'GET',
+    url: '/koalas'
+  }).then(function (response) {
+    $('#viewKoalas').empty();
+    for (let koala of response) {
+      $('#viewKoalas').append(`
+      <tr>
+        <td>${koala.name}</td>
+        <td>${koala.age}</td>
+        <td>${koala.gender}</td>
+        <td>${koala.ready}</td>
+        <td>${koala.notes}</td>
+      </tr>
+      `)
+    }
+  }).catch (function (error){
+    console.log('error');
+    alert('Something Is Wrong');
+  })
   
 } // end getKoalas
 
 function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
- $.ajax({
-  type: 'GET',
-  url: '/koalas',
- }).then({
-    function(response){
-      $()
-      for (let koala of response)
- {
-  $('viewKoalas').append(`
-  <tr>
-    <td>${koala.name}</td>
-    <td>${koala.gender}</td>
-    <td>${koala.age}</td>
-    <td>${koala.ready}</td>
-    <td>${koala.notes}</td>
-  </tr>`)
- }    }
- }).catch(function(error){
-  console.log('error');
-  alert('Something went wrong!');
- });
-}
+} // end saveKoala
 
-function sendKoalasToServer() {
+function sendKoalaToServer () {
+  console.log('in sendKoalaToServer');
+
   $.ajax({
     type: 'POST',
     url: '/koalas',
     data: {
-      id: $('#nameIn').val(),
+      name: $('#nameIn').val(),
       age: $('#ageIn').val(),
       gender: $('#genderIn').val(),
       ready: $('#readyForTransferIn').val(),
-      notes: $('#notesIn')
+      notes: $('#notesIn').val()
     }
   }).then(function (response) {
     getKoalas();
-}).catch (function (error){
-  console.log('error');
-  alert('Something Is Wrong');
-})
+  }).catch (function (error){
+    console.log('error');
+    alert('Something Is Wrong');
+  })
 }
