@@ -9,7 +9,7 @@
   <!-- <link rel="stylesheet" href="views/styles.css"> -->
 </head>
 
-<body>
+<body style="background-color:rgb(108, 103, 139)">
   <header>
     <img src="images/icon.png" class="icon" />
     <h1>Koala Holla</h1>
@@ -20,8 +20,20 @@
     <h2>Add Koala</h2>
     <input type="text" id="nameIn" value="" placeholder="Name">
     <input type="text" id="ageIn" value="" placeholder="Age">
-    <input type="text" id="genderIn" value="" placeholder="Gender">
-    <input type="text" id="readyForTransferIn" value="" placeholder="Transfer">
+    <label for="genderIn"></label>
+    <select name="genderIn" id="genderIn">
+      <option value="">Gender</option>
+      <option value="M">Male</option>
+      <option value="F">Female</option>
+    </select>
+    <!-- <input type="text" id="genderIn" value="" placeholder="Gender"> -->
+    <label for="readyForTransferIn"></label>
+    <select name="readyForTransferIn" id="readyForTransferIn">
+      <option value="">Ready for Transfer</option>
+      <option value="true">True</option>
+      <option value="false">False</option>
+    </select>
+    <!-- <input type="text" id="readyForTransferIn" value="" placeholder="Transfer"> -->
     <input type="text" id="notesIn" value="" placeholder="Notes">
     <button type="button" id="addButton">Add Koala</button>
   </section>
@@ -30,11 +42,14 @@
     <table>
       <thead>
         <tr>
+          <th>Id</th>
           <th>Name</th>
           <th>Age</th>
           <th>Gender</th>
           <th>Ready for Transfer</th>
           <th>Notes</th>
+          <th>Mark Ready</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody id="viewKoalas">
